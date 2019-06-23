@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group 'kg.apps'
+version '1.0'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':exchange')
+
+    compile 'org.springframework.boot:spring-boot-starter'
+//    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    compile 'org.springframework.boot:spring-boot-starter-validation'
+//    compile 'org.springframework.boot:spring-boot-starter-web'
+//    compile 'org.springframework.boot:spring-boot-starter-amqp'
+//    compile 'org.springframework.boot:spring-boot-configuration-processor'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    runtimeOnly "io.grpc:grpc-netty-shaded:1.21.0"
+    implementation "io.grpc:grpc-protobuf:1.21.0"
+}
+
+mainClassName = 'kg.apps.ServerApplication'

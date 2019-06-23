@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id "com.google.protobuf" version "0.8.8"
+}
+apply plugin: 'java'
+
+def grpcVersion = '1.21.0'
+def protobufVersion = '3.7.1'
+
+group 'kg.apps'
+version '1.0'
+
+repositories {
+    maven {
+        url "https://maven-central.storage-download.googleapis.com/repos/central/data/"
+    }
+    mavenLocal()
+}
+
+dependencies {
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
+}
+
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:${protobufVersion}" }
+    plugins {
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}" }
+    }
+    generateProtoTasks {
+        all()*.plugins { grpc {} }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
