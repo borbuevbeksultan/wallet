@@ -46,15 +46,11 @@ hs_err_pid*
 
 .gitignore
 .idea/modules/
-client/src/
 exchange/build/extracted-protos/
 exchange/build/generated/source/proto/main/grpc/
 exchange/build/generated/source/proto/test/
 exchange/build/tmp/compileJava/
 server/build/tmp/compileJava/
-server/src/main/java/kg/apps/repositories/
-server/src/main/java/kg/apps/service/
-server/src/test/
 /server/build/
 /exchange/build/
 /client/build/

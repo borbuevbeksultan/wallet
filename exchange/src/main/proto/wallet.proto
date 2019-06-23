@@ -2,6 +2,14 @@ syntax = "proto3";
 
 option java_package = 'kg.apps';
 
+service MyService {
+    rpc myMethod(MyMessage) returns (MyMessage) {}
+}
+
 message MyMessage {
+    string body = 1;
+}
+
+message YourMessage {
     string body = 1;
 }

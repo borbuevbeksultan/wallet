@@ -21,6 +21,8 @@ dependencies {
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
     runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
+
+    compileOnly "javax.annotation:javax.annotation-api:1.2"
 }
 
 protobuf {
