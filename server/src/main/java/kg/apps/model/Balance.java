@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class Balance {
-    private Wallet account;
+    private Wallet wallet;
     private BigDecimal amount;
     private Currency currency;
 }
