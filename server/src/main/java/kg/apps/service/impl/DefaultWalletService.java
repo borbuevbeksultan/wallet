@@ -3,7 +3,7 @@ package kg.apps.service.impl;
 import kg.apps.model.Balance;
 import kg.apps.model.Currency;
 import kg.apps.model.User;
-import kg.apps.repository.WalletRepository;
+import kg.apps.repository.BalanceRepository;
 import kg.apps.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DefaultWalletService implements WalletService {
 
-    private final WalletRepository walletRepository;
+    private final BalanceRepository balanceRepository;
 
     @Override
     public void deposit(User user, BigDecimal amount, Currency currency) {
-        Optional<Balance> balance = walletRepository.findByUserAndCurrency(user.getId(), currency);
+        Optional<Balance> balance = balanceRepository.findByUserAndCurrency(user.getId(), currency);
         balance.ifPresentOrElse(wallet1 -> {
             wallet1.setAmount(amount);
 

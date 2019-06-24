@@ -14,34 +14,150 @@ public final class Wallet {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface MyMessageOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:MyMessage)
+  /**
+   * Protobuf enum {@code Currency}
+   */
+  public enum Currency
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>EUR = 0;</code>
+     */
+    EUR(0),
+    /**
+     * <code>USD = 1;</code>
+     */
+    USD(1),
+    /**
+     * <code>GBP = 2;</code>
+     */
+    GBP(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>EUR = 0;</code>
+     */
+    public static final int EUR_VALUE = 0;
+    /**
+     * <code>USD = 1;</code>
+     */
+    public static final int USD_VALUE = 1;
+    /**
+     * <code>GBP = 2;</code>
+     */
+    public static final int GBP_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Currency valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Currency forNumber(int value) {
+      switch (value) {
+        case 0: return EUR;
+        case 1: return USD;
+        case 2: return GBP;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Currency>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Currency> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Currency>() {
+            public Currency findValueByNumber(int number) {
+              return Currency.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return kg.apps.Wallet.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final Currency[] VALUES = values();
+
+    public static Currency valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private Currency(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:Currency)
+  }
+
+  public interface DepositOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Deposit)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string body = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
-    java.lang.String getBody();
+    int getUserId();
+
     /**
-     * <code>string body = 1;</code>
+     * <code>double amount = 2;</code>
      */
-    com.google.protobuf.ByteString
-        getBodyBytes();
+    double getAmount();
+
+    /**
+     * <code>.Currency currency = 3;</code>
+     */
+    int getCurrencyValue();
+    /**
+     * <code>.Currency currency = 3;</code>
+     */
+    kg.apps.Wallet.Currency getCurrency();
   }
   /**
-   * Protobuf type {@code MyMessage}
+   * Protobuf type {@code Deposit}
    */
-  public  static final class MyMessage extends
+  public  static final class Deposit extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:MyMessage)
-      MyMessageOrBuilder {
+      // @@protoc_insertion_point(message_implements:Deposit)
+      DepositOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use MyMessage.newBuilder() to construct.
-    private MyMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use Deposit.newBuilder() to construct.
+    private Deposit(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private MyMessage() {
-      body_ = "";
+    private Deposit() {
+      currency_ = 0;
     }
 
     @java.lang.Override
@@ -49,7 +165,7 @@ public final class Wallet {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private MyMessage(
+    private Deposit(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -68,10 +184,20 @@ public final class Wallet {
             case 0:
               done = true;
               break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 8: {
 
-              body_ = s;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 17: {
+
+              amount_ = input.readDouble();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+
+              currency_ = rawValue;
               break;
             }
             default: {
@@ -95,49 +221,50 @@ public final class Wallet {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return kg.apps.Wallet.internal_static_MyMessage_descriptor;
+      return kg.apps.Wallet.internal_static_Deposit_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return kg.apps.Wallet.internal_static_MyMessage_fieldAccessorTable
+      return kg.apps.Wallet.internal_static_Deposit_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              kg.apps.Wallet.MyMessage.class, kg.apps.Wallet.MyMessage.Builder.class);
+              kg.apps.Wallet.Deposit.class, kg.apps.Wallet.Deposit.Builder.class);
     }
 
-    public static final int BODY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object body_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
     /**
-     * <code>string body = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
-    public java.lang.String getBody() {
-      java.lang.Object ref = body_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        body_ = s;
-        return s;
-      }
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int AMOUNT_FIELD_NUMBER = 2;
+    private double amount_;
+    /**
+     * <code>double amount = 2;</code>
+     */
+    public double getAmount() {
+      return amount_;
+    }
+
+    public static final int CURRENCY_FIELD_NUMBER = 3;
+    private int currency_;
+    /**
+     * <code>.Currency currency = 3;</code>
+     */
+    public int getCurrencyValue() {
+      return currency_;
     }
     /**
-     * <code>string body = 1;</code>
+     * <code>.Currency currency = 3;</code>
      */
-    public com.google.protobuf.ByteString
-        getBodyBytes() {
-      java.lang.Object ref = body_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        body_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public kg.apps.Wallet.Currency getCurrency() {
+      @SuppressWarnings("deprecation")
+      kg.apps.Wallet.Currency result = kg.apps.Wallet.Currency.valueOf(currency_);
+      return result == null ? kg.apps.Wallet.Currency.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -154,8 +281,14 @@ public final class Wallet {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getBodyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, body_);
+      if (userId_ != 0) {
+        output.writeUInt32(1, userId_);
+      }
+      if (amount_ != 0D) {
+        output.writeDouble(2, amount_);
+      }
+      if (currency_ != kg.apps.Wallet.Currency.EUR.getNumber()) {
+        output.writeEnum(3, currency_);
       }
       unknownFields.writeTo(output);
     }
@@ -166,8 +299,17 @@ public final class Wallet {
       if (size != -1) return size;
 
       size = 0;
-      if (!getBodyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, body_);
+      if (userId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (amount_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, amount_);
+      }
+      if (currency_ != kg.apps.Wallet.Currency.EUR.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, currency_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -179,13 +321,17 @@ public final class Wallet {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof kg.apps.Wallet.MyMessage)) {
+      if (!(obj instanceof kg.apps.Wallet.Deposit)) {
         return super.equals(obj);
       }
-      kg.apps.Wallet.MyMessage other = (kg.apps.Wallet.MyMessage) obj;
+      kg.apps.Wallet.Deposit other = (kg.apps.Wallet.Deposit) obj;
 
-      if (!getBody()
-          .equals(other.getBody())) return false;
+      if (getUserId()
+          != other.getUserId()) return false;
+      if (java.lang.Double.doubleToLongBits(getAmount())
+          != java.lang.Double.doubleToLongBits(
+              other.getAmount())) return false;
+      if (currency_ != other.currency_) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -197,76 +343,81 @@ public final class Wallet {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + BODY_FIELD_NUMBER;
-      hash = (53 * hash) + getBody().hashCode();
+      hash = (37 * hash) + USER_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId();
+      hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getAmount()));
+      hash = (37 * hash) + CURRENCY_FIELD_NUMBER;
+      hash = (53 * hash) + currency_;
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(byte[] data)
+    public static kg.apps.Wallet.Deposit parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(java.io.InputStream input)
+    public static kg.apps.Wallet.Deposit parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static kg.apps.Wallet.MyMessage parseDelimitedFrom(java.io.InputStream input)
+    public static kg.apps.Wallet.Deposit parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static kg.apps.Wallet.MyMessage parseDelimitedFrom(
+    public static kg.apps.Wallet.Deposit parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static kg.apps.Wallet.MyMessage parseFrom(
+    public static kg.apps.Wallet.Deposit parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -279,7 +430,7 @@ public final class Wallet {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(kg.apps.Wallet.MyMessage prototype) {
+    public static Builder newBuilder(kg.apps.Wallet.Deposit prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -295,26 +446,26 @@ public final class Wallet {
       return builder;
     }
     /**
-     * Protobuf type {@code MyMessage}
+     * Protobuf type {@code Deposit}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:MyMessage)
-        kg.apps.Wallet.MyMessageOrBuilder {
+        // @@protoc_insertion_point(builder_implements:Deposit)
+        kg.apps.Wallet.DepositOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return kg.apps.Wallet.internal_static_MyMessage_descriptor;
+        return kg.apps.Wallet.internal_static_Deposit_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return kg.apps.Wallet.internal_static_MyMessage_fieldAccessorTable
+        return kg.apps.Wallet.internal_static_Deposit_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                kg.apps.Wallet.MyMessage.class, kg.apps.Wallet.MyMessage.Builder.class);
+                kg.apps.Wallet.Deposit.class, kg.apps.Wallet.Deposit.Builder.class);
       }
 
-      // Construct using kg.apps.Wallet.MyMessage.newBuilder()
+      // Construct using kg.apps.Wallet.Deposit.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -332,7 +483,11 @@ public final class Wallet {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        body_ = "";
+        userId_ = 0;
+
+        amount_ = 0D;
+
+        currency_ = 0;
 
         return this;
       }
@@ -340,17 +495,17 @@ public final class Wallet {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return kg.apps.Wallet.internal_static_MyMessage_descriptor;
+        return kg.apps.Wallet.internal_static_Deposit_descriptor;
       }
 
       @java.lang.Override
-      public kg.apps.Wallet.MyMessage getDefaultInstanceForType() {
-        return kg.apps.Wallet.MyMessage.getDefaultInstance();
+      public kg.apps.Wallet.Deposit getDefaultInstanceForType() {
+        return kg.apps.Wallet.Deposit.getDefaultInstance();
       }
 
       @java.lang.Override
-      public kg.apps.Wallet.MyMessage build() {
-        kg.apps.Wallet.MyMessage result = buildPartial();
+      public kg.apps.Wallet.Deposit build() {
+        kg.apps.Wallet.Deposit result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -358,9 +513,11 @@ public final class Wallet {
       }
 
       @java.lang.Override
-      public kg.apps.Wallet.MyMessage buildPartial() {
-        kg.apps.Wallet.MyMessage result = new kg.apps.Wallet.MyMessage(this);
-        result.body_ = body_;
+      public kg.apps.Wallet.Deposit buildPartial() {
+        kg.apps.Wallet.Deposit result = new kg.apps.Wallet.Deposit(this);
+        result.userId_ = userId_;
+        result.amount_ = amount_;
+        result.currency_ = currency_;
         onBuilt();
         return result;
       }
@@ -399,19 +556,24 @@ public final class Wallet {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof kg.apps.Wallet.MyMessage) {
-          return mergeFrom((kg.apps.Wallet.MyMessage)other);
+        if (other instanceof kg.apps.Wallet.Deposit) {
+          return mergeFrom((kg.apps.Wallet.Deposit)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(kg.apps.Wallet.MyMessage other) {
-        if (other == kg.apps.Wallet.MyMessage.getDefaultInstance()) return this;
-        if (!other.getBody().isEmpty()) {
-          body_ = other.body_;
-          onChanged();
+      public Builder mergeFrom(kg.apps.Wallet.Deposit other) {
+        if (other == kg.apps.Wallet.Deposit.getDefaultInstance()) return this;
+        if (other.getUserId() != 0) {
+          setUserId(other.getUserId());
+        }
+        if (other.getAmount() != 0D) {
+          setAmount(other.getAmount());
+        }
+        if (other.currency_ != 0) {
+          setCurrencyValue(other.getCurrencyValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -428,11 +590,11 @@ public final class Wallet {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        kg.apps.Wallet.MyMessage parsedMessage = null;
+        kg.apps.Wallet.Deposit parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (kg.apps.Wallet.MyMessage) e.getUnfinishedMessage();
+          parsedMessage = (kg.apps.Wallet.Deposit) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -442,71 +604,99 @@ public final class Wallet {
         return this;
       }
 
-      private java.lang.Object body_ = "";
+      private int userId_ ;
       /**
-       * <code>string body = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
-      public java.lang.String getBody() {
-        java.lang.Object ref = body_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          body_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getUserId() {
+        return userId_;
       }
       /**
-       * <code>string body = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getBodyBytes() {
-        java.lang.Object ref = body_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          body_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string body = 1;</code>
-       */
-      public Builder setBody(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        body_ = value;
+      public Builder setUserId(int value) {
+        
+        userId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string body = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
-      public Builder clearBody() {
+      public Builder clearUserId() {
         
-        body_ = getDefaultInstance().getBody();
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private double amount_ ;
+      /**
+       * <code>double amount = 2;</code>
+       */
+      public double getAmount() {
+        return amount_;
+      }
+      /**
+       * <code>double amount = 2;</code>
+       */
+      public Builder setAmount(double value) {
+        
+        amount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string body = 1;</code>
+       * <code>double amount = 2;</code>
        */
-      public Builder setBodyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+      public Builder clearAmount() {
         
-        body_ = value;
+        amount_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private int currency_ = 0;
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public int getCurrencyValue() {
+        return currency_;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public Builder setCurrencyValue(int value) {
+        currency_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public kg.apps.Wallet.Currency getCurrency() {
+        @SuppressWarnings("deprecation")
+        kg.apps.Wallet.Currency result = kg.apps.Wallet.Currency.valueOf(currency_);
+        return result == null ? kg.apps.Wallet.Currency.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public Builder setCurrency(kg.apps.Wallet.Currency value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        currency_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public Builder clearCurrency() {
+        
+        currency_ = 0;
         onChanged();
         return this;
       }
@@ -523,74 +713,83 @@ public final class Wallet {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:MyMessage)
+      // @@protoc_insertion_point(builder_scope:Deposit)
     }
 
-    // @@protoc_insertion_point(class_scope:MyMessage)
-    private static final kg.apps.Wallet.MyMessage DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:Deposit)
+    private static final kg.apps.Wallet.Deposit DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new kg.apps.Wallet.MyMessage();
+      DEFAULT_INSTANCE = new kg.apps.Wallet.Deposit();
     }
 
-    public static kg.apps.Wallet.MyMessage getDefaultInstance() {
+    public static kg.apps.Wallet.Deposit getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<MyMessage>
-        PARSER = new com.google.protobuf.AbstractParser<MyMessage>() {
+    private static final com.google.protobuf.Parser<Deposit>
+        PARSER = new com.google.protobuf.AbstractParser<Deposit>() {
       @java.lang.Override
-      public MyMessage parsePartialFrom(
+      public Deposit parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MyMessage(input, extensionRegistry);
+        return new Deposit(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<MyMessage> parser() {
+    public static com.google.protobuf.Parser<Deposit> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<MyMessage> getParserForType() {
+    public com.google.protobuf.Parser<Deposit> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public kg.apps.Wallet.MyMessage getDefaultInstanceForType() {
+    public kg.apps.Wallet.Deposit getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface YourMessageOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:YourMessage)
+  public interface WithdrawOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Withdraw)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string body = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
-    java.lang.String getBody();
+    int getUserId();
+
     /**
-     * <code>string body = 1;</code>
+     * <code>double amount = 2;</code>
      */
-    com.google.protobuf.ByteString
-        getBodyBytes();
+    double getAmount();
+
+    /**
+     * <code>.Currency currency = 3;</code>
+     */
+    int getCurrencyValue();
+    /**
+     * <code>.Currency currency = 3;</code>
+     */
+    kg.apps.Wallet.Currency getCurrency();
   }
   /**
-   * Protobuf type {@code YourMessage}
+   * Protobuf type {@code Withdraw}
    */
-  public  static final class YourMessage extends
+  public  static final class Withdraw extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:YourMessage)
-      YourMessageOrBuilder {
+      // @@protoc_insertion_point(message_implements:Withdraw)
+      WithdrawOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use YourMessage.newBuilder() to construct.
-    private YourMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use Withdraw.newBuilder() to construct.
+    private Withdraw(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private YourMessage() {
-      body_ = "";
+    private Withdraw() {
+      currency_ = 0;
     }
 
     @java.lang.Override
@@ -598,7 +797,7 @@ public final class Wallet {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private YourMessage(
+    private Withdraw(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -617,10 +816,20 @@ public final class Wallet {
             case 0:
               done = true;
               break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 8: {
 
-              body_ = s;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 17: {
+
+              amount_ = input.readDouble();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+
+              currency_ = rawValue;
               break;
             }
             default: {
@@ -644,49 +853,50 @@ public final class Wallet {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return kg.apps.Wallet.internal_static_YourMessage_descriptor;
+      return kg.apps.Wallet.internal_static_Withdraw_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return kg.apps.Wallet.internal_static_YourMessage_fieldAccessorTable
+      return kg.apps.Wallet.internal_static_Withdraw_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              kg.apps.Wallet.YourMessage.class, kg.apps.Wallet.YourMessage.Builder.class);
+              kg.apps.Wallet.Withdraw.class, kg.apps.Wallet.Withdraw.Builder.class);
     }
 
-    public static final int BODY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object body_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
     /**
-     * <code>string body = 1;</code>
+     * <code>uint32 user_id = 1;</code>
      */
-    public java.lang.String getBody() {
-      java.lang.Object ref = body_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        body_ = s;
-        return s;
-      }
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int AMOUNT_FIELD_NUMBER = 2;
+    private double amount_;
+    /**
+     * <code>double amount = 2;</code>
+     */
+    public double getAmount() {
+      return amount_;
+    }
+
+    public static final int CURRENCY_FIELD_NUMBER = 3;
+    private int currency_;
+    /**
+     * <code>.Currency currency = 3;</code>
+     */
+    public int getCurrencyValue() {
+      return currency_;
     }
     /**
-     * <code>string body = 1;</code>
+     * <code>.Currency currency = 3;</code>
      */
-    public com.google.protobuf.ByteString
-        getBodyBytes() {
-      java.lang.Object ref = body_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        body_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public kg.apps.Wallet.Currency getCurrency() {
+      @SuppressWarnings("deprecation")
+      kg.apps.Wallet.Currency result = kg.apps.Wallet.Currency.valueOf(currency_);
+      return result == null ? kg.apps.Wallet.Currency.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -703,8 +913,14 @@ public final class Wallet {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getBodyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, body_);
+      if (userId_ != 0) {
+        output.writeUInt32(1, userId_);
+      }
+      if (amount_ != 0D) {
+        output.writeDouble(2, amount_);
+      }
+      if (currency_ != kg.apps.Wallet.Currency.EUR.getNumber()) {
+        output.writeEnum(3, currency_);
       }
       unknownFields.writeTo(output);
     }
@@ -715,8 +931,17 @@ public final class Wallet {
       if (size != -1) return size;
 
       size = 0;
-      if (!getBodyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, body_);
+      if (userId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (amount_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, amount_);
+      }
+      if (currency_ != kg.apps.Wallet.Currency.EUR.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, currency_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -728,13 +953,17 @@ public final class Wallet {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof kg.apps.Wallet.YourMessage)) {
+      if (!(obj instanceof kg.apps.Wallet.Withdraw)) {
         return super.equals(obj);
       }
-      kg.apps.Wallet.YourMessage other = (kg.apps.Wallet.YourMessage) obj;
+      kg.apps.Wallet.Withdraw other = (kg.apps.Wallet.Withdraw) obj;
 
-      if (!getBody()
-          .equals(other.getBody())) return false;
+      if (getUserId()
+          != other.getUserId()) return false;
+      if (java.lang.Double.doubleToLongBits(getAmount())
+          != java.lang.Double.doubleToLongBits(
+              other.getAmount())) return false;
+      if (currency_ != other.currency_) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -746,76 +975,81 @@ public final class Wallet {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + BODY_FIELD_NUMBER;
-      hash = (53 * hash) + getBody().hashCode();
+      hash = (37 * hash) + USER_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId();
+      hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getAmount()));
+      hash = (37 * hash) + CURRENCY_FIELD_NUMBER;
+      hash = (53 * hash) + currency_;
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(byte[] data)
+    public static kg.apps.Wallet.Withdraw parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(java.io.InputStream input)
+    public static kg.apps.Wallet.Withdraw parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static kg.apps.Wallet.YourMessage parseDelimitedFrom(java.io.InputStream input)
+    public static kg.apps.Wallet.Withdraw parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static kg.apps.Wallet.YourMessage parseDelimitedFrom(
+    public static kg.apps.Wallet.Withdraw parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static kg.apps.Wallet.YourMessage parseFrom(
+    public static kg.apps.Wallet.Withdraw parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -828,7 +1062,7 @@ public final class Wallet {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(kg.apps.Wallet.YourMessage prototype) {
+    public static Builder newBuilder(kg.apps.Wallet.Withdraw prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -844,26 +1078,26 @@ public final class Wallet {
       return builder;
     }
     /**
-     * Protobuf type {@code YourMessage}
+     * Protobuf type {@code Withdraw}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:YourMessage)
-        kg.apps.Wallet.YourMessageOrBuilder {
+        // @@protoc_insertion_point(builder_implements:Withdraw)
+        kg.apps.Wallet.WithdrawOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return kg.apps.Wallet.internal_static_YourMessage_descriptor;
+        return kg.apps.Wallet.internal_static_Withdraw_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return kg.apps.Wallet.internal_static_YourMessage_fieldAccessorTable
+        return kg.apps.Wallet.internal_static_Withdraw_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                kg.apps.Wallet.YourMessage.class, kg.apps.Wallet.YourMessage.Builder.class);
+                kg.apps.Wallet.Withdraw.class, kg.apps.Wallet.Withdraw.Builder.class);
       }
 
-      // Construct using kg.apps.Wallet.YourMessage.newBuilder()
+      // Construct using kg.apps.Wallet.Withdraw.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -881,7 +1115,11 @@ public final class Wallet {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        body_ = "";
+        userId_ = 0;
+
+        amount_ = 0D;
+
+        currency_ = 0;
 
         return this;
       }
@@ -889,17 +1127,17 @@ public final class Wallet {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return kg.apps.Wallet.internal_static_YourMessage_descriptor;
+        return kg.apps.Wallet.internal_static_Withdraw_descriptor;
       }
 
       @java.lang.Override
-      public kg.apps.Wallet.YourMessage getDefaultInstanceForType() {
-        return kg.apps.Wallet.YourMessage.getDefaultInstance();
+      public kg.apps.Wallet.Withdraw getDefaultInstanceForType() {
+        return kg.apps.Wallet.Withdraw.getDefaultInstance();
       }
 
       @java.lang.Override
-      public kg.apps.Wallet.YourMessage build() {
-        kg.apps.Wallet.YourMessage result = buildPartial();
+      public kg.apps.Wallet.Withdraw build() {
+        kg.apps.Wallet.Withdraw result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -907,9 +1145,11 @@ public final class Wallet {
       }
 
       @java.lang.Override
-      public kg.apps.Wallet.YourMessage buildPartial() {
-        kg.apps.Wallet.YourMessage result = new kg.apps.Wallet.YourMessage(this);
-        result.body_ = body_;
+      public kg.apps.Wallet.Withdraw buildPartial() {
+        kg.apps.Wallet.Withdraw result = new kg.apps.Wallet.Withdraw(this);
+        result.userId_ = userId_;
+        result.amount_ = amount_;
+        result.currency_ = currency_;
         onBuilt();
         return result;
       }
@@ -948,19 +1188,24 @@ public final class Wallet {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof kg.apps.Wallet.YourMessage) {
-          return mergeFrom((kg.apps.Wallet.YourMessage)other);
+        if (other instanceof kg.apps.Wallet.Withdraw) {
+          return mergeFrom((kg.apps.Wallet.Withdraw)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(kg.apps.Wallet.YourMessage other) {
-        if (other == kg.apps.Wallet.YourMessage.getDefaultInstance()) return this;
-        if (!other.getBody().isEmpty()) {
-          body_ = other.body_;
-          onChanged();
+      public Builder mergeFrom(kg.apps.Wallet.Withdraw other) {
+        if (other == kg.apps.Wallet.Withdraw.getDefaultInstance()) return this;
+        if (other.getUserId() != 0) {
+          setUserId(other.getUserId());
+        }
+        if (other.getAmount() != 0D) {
+          setAmount(other.getAmount());
+        }
+        if (other.currency_ != 0) {
+          setCurrencyValue(other.getCurrencyValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -977,11 +1222,11 @@ public final class Wallet {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        kg.apps.Wallet.YourMessage parsedMessage = null;
+        kg.apps.Wallet.Withdraw parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (kg.apps.Wallet.YourMessage) e.getUnfinishedMessage();
+          parsedMessage = (kg.apps.Wallet.Withdraw) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -991,71 +1236,99 @@ public final class Wallet {
         return this;
       }
 
-      private java.lang.Object body_ = "";
+      private int userId_ ;
       /**
-       * <code>string body = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
-      public java.lang.String getBody() {
-        java.lang.Object ref = body_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          body_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getUserId() {
+        return userId_;
       }
       /**
-       * <code>string body = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getBodyBytes() {
-        java.lang.Object ref = body_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          body_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string body = 1;</code>
-       */
-      public Builder setBody(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        body_ = value;
+      public Builder setUserId(int value) {
+        
+        userId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string body = 1;</code>
+       * <code>uint32 user_id = 1;</code>
        */
-      public Builder clearBody() {
+      public Builder clearUserId() {
         
-        body_ = getDefaultInstance().getBody();
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private double amount_ ;
+      /**
+       * <code>double amount = 2;</code>
+       */
+      public double getAmount() {
+        return amount_;
+      }
+      /**
+       * <code>double amount = 2;</code>
+       */
+      public Builder setAmount(double value) {
+        
+        amount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string body = 1;</code>
+       * <code>double amount = 2;</code>
        */
-      public Builder setBodyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+      public Builder clearAmount() {
         
-        body_ = value;
+        amount_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private int currency_ = 0;
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public int getCurrencyValue() {
+        return currency_;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public Builder setCurrencyValue(int value) {
+        currency_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public kg.apps.Wallet.Currency getCurrency() {
+        @SuppressWarnings("deprecation")
+        kg.apps.Wallet.Currency result = kg.apps.Wallet.Currency.valueOf(currency_);
+        return result == null ? kg.apps.Wallet.Currency.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public Builder setCurrency(kg.apps.Wallet.Currency value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        currency_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.Currency currency = 3;</code>
+       */
+      public Builder clearCurrency() {
+        
+        currency_ = 0;
         onChanged();
         return this;
       }
@@ -1072,56 +1345,472 @@ public final class Wallet {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:YourMessage)
+      // @@protoc_insertion_point(builder_scope:Withdraw)
     }
 
-    // @@protoc_insertion_point(class_scope:YourMessage)
-    private static final kg.apps.Wallet.YourMessage DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:Withdraw)
+    private static final kg.apps.Wallet.Withdraw DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new kg.apps.Wallet.YourMessage();
+      DEFAULT_INSTANCE = new kg.apps.Wallet.Withdraw();
     }
 
-    public static kg.apps.Wallet.YourMessage getDefaultInstance() {
+    public static kg.apps.Wallet.Withdraw getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<YourMessage>
-        PARSER = new com.google.protobuf.AbstractParser<YourMessage>() {
+    private static final com.google.protobuf.Parser<Withdraw>
+        PARSER = new com.google.protobuf.AbstractParser<Withdraw>() {
       @java.lang.Override
-      public YourMessage parsePartialFrom(
+      public Withdraw parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new YourMessage(input, extensionRegistry);
+        return new Withdraw(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<YourMessage> parser() {
+    public static com.google.protobuf.Parser<Withdraw> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<YourMessage> getParserForType() {
+    public com.google.protobuf.Parser<Withdraw> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public kg.apps.Wallet.YourMessage getDefaultInstanceForType() {
+    public kg.apps.Wallet.Withdraw getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Response)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code Response}
+   */
+  public  static final class Response extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:Response)
+      ResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Response.newBuilder() to construct.
+    private Response(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Response() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Response(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return kg.apps.Wallet.internal_static_Response_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return kg.apps.Wallet.internal_static_Response_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              kg.apps.Wallet.Response.class, kg.apps.Wallet.Response.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof kg.apps.Wallet.Response)) {
+        return super.equals(obj);
+      }
+      kg.apps.Wallet.Response other = (kg.apps.Wallet.Response) obj;
+
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static kg.apps.Wallet.Response parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static kg.apps.Wallet.Response parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static kg.apps.Wallet.Response parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static kg.apps.Wallet.Response parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static kg.apps.Wallet.Response parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static kg.apps.Wallet.Response parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static kg.apps.Wallet.Response parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static kg.apps.Wallet.Response parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static kg.apps.Wallet.Response parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static kg.apps.Wallet.Response parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static kg.apps.Wallet.Response parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static kg.apps.Wallet.Response parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(kg.apps.Wallet.Response prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Response}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Response)
+        kg.apps.Wallet.ResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return kg.apps.Wallet.internal_static_Response_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return kg.apps.Wallet.internal_static_Response_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                kg.apps.Wallet.Response.class, kg.apps.Wallet.Response.Builder.class);
+      }
+
+      // Construct using kg.apps.Wallet.Response.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return kg.apps.Wallet.internal_static_Response_descriptor;
+      }
+
+      @java.lang.Override
+      public kg.apps.Wallet.Response getDefaultInstanceForType() {
+        return kg.apps.Wallet.Response.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public kg.apps.Wallet.Response build() {
+        kg.apps.Wallet.Response result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public kg.apps.Wallet.Response buildPartial() {
+        kg.apps.Wallet.Response result = new kg.apps.Wallet.Response(this);
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof kg.apps.Wallet.Response) {
+          return mergeFrom((kg.apps.Wallet.Response)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(kg.apps.Wallet.Response other) {
+        if (other == kg.apps.Wallet.Response.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        kg.apps.Wallet.Response parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (kg.apps.Wallet.Response) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:Response)
+    }
+
+    // @@protoc_insertion_point(class_scope:Response)
+    private static final kg.apps.Wallet.Response DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new kg.apps.Wallet.Response();
+    }
+
+    public static kg.apps.Wallet.Response getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Response>
+        PARSER = new com.google.protobuf.AbstractParser<Response>() {
+      @java.lang.Override
+      public Response parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Response(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Response> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Response> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public kg.apps.Wallet.Response getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_MyMessage_descriptor;
+    internal_static_Deposit_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_MyMessage_fieldAccessorTable;
+      internal_static_Deposit_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_YourMessage_descriptor;
+    internal_static_Withdraw_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_YourMessage_fieldAccessorTable;
+      internal_static_Withdraw_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Response_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Response_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1131,10 +1820,14 @@ public final class Wallet {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014wallet.proto\"\031\n\tMyMessage\022\014\n\004body\030\001 \001(" +
-      "\t\"\033\n\013YourMessage\022\014\n\004body\030\001 \001(\t21\n\tMyServ" +
-      "ice\022$\n\010myMethod\022\n.MyMessage\032\n.MyMessage\"" +
-      "\000B\t\n\007kg.appsb\006proto3"
+      "\n\014wallet.proto\"G\n\007Deposit\022\017\n\007user_id\030\001 \001" +
+      "(\r\022\016\n\006amount\030\002 \001(\001\022\033\n\010currency\030\003 \001(\0162\t.C" +
+      "urrency\"H\n\010Withdraw\022\017\n\007user_id\030\001 \001(\r\022\016\n\006" +
+      "amount\030\002 \001(\001\022\033\n\010currency\030\003 \001(\0162\t.Currenc" +
+      "y\"\n\n\010Response*%\n\010Currency\022\007\n\003EUR\020\000\022\007\n\003US" +
+      "D\020\001\022\007\n\003GBP\020\0022U\n\rWalletService\022 \n\007deposit" +
+      "\022\010.Deposit\032\t.Response\"\000\022\"\n\010withdraw\022\t.Wi" +
+      "thdraw\032\t.Response\"\000B\t\n\007kg.appsb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1148,18 +1841,24 @@ public final class Wallet {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_MyMessage_descriptor =
+    internal_static_Deposit_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_MyMessage_fieldAccessorTable = new
+    internal_static_Deposit_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_MyMessage_descriptor,
-        new java.lang.String[] { "Body", });
-    internal_static_YourMessage_descriptor =
+        internal_static_Deposit_descriptor,
+        new java.lang.String[] { "UserId", "Amount", "Currency", });
+    internal_static_Withdraw_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_YourMessage_fieldAccessorTable = new
+    internal_static_Withdraw_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_YourMessage_descriptor,
-        new java.lang.String[] { "Body", });
+        internal_static_Withdraw_descriptor,
+        new java.lang.String[] { "UserId", "Amount", "Currency", });
+    internal_static_Response_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_Response_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Response_descriptor,
+        new java.lang.String[] { });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
