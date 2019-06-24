@@ -2,7 +2,8 @@ package kg.apps.component;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import kg.apps.service.MyServiceImpl;
+import kg.apps.WalletServiceGrpc;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
@@ -11,21 +12,18 @@ import java.io.IOException;
 
 @Component
 @Configuration
+@RequiredArgsConstructor
 public class GrpcServer {
 
+    private final WalletServiceGrpc.WalletServiceImplBase walletServiceImplBase;
+
     private Server grpcServer;
-
-    private final MyServiceImpl myService;
-
-    public GrpcServer(MyServiceImpl myService) {
-        this.myService = myService;
-    }
 
     @PostConstruct
     public void initGrpcServer() {
         grpcServer = ServerBuilder
                 .forPort(8888)
-                .addService(myService)
+                .addService(walletServiceImplBase)
                 .build();
     }
 

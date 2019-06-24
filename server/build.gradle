@@ -14,8 +14,12 @@ repositories {
     mavenCentral()
 }
 
+evaluationDependsOn(':exchange')
+
 dependencies {
     compile project(':exchange')
+
+    compile 'org.projectlombok:lombok:1.18.6'
 
     compile 'org.springframework.boot:spring-boot-starter'
 //    compile 'org.springframework.boot:spring-boot-starter-data-jpa'

@@ -2,14 +2,29 @@ syntax = "proto3";
 
 option java_package = 'kg.apps';
 
-service MyService {
-    rpc myMethod(MyMessage) returns (MyMessage) {}
+service WalletService {
+    rpc deposit (Deposit) returns (Response) {}
+    rpc withdraw (Withdraw) returns (Response) {}
 }
 
-message MyMessage {
-    string body = 1;
+message Deposit {
+    uint32 user_id = 1;
+    double amount = 2;
+    Currency currency = 3;
 }
 
-message YourMessage {
-    string body = 1;
+message Withdraw {
+    uint32 user_id = 1;
+    double amount = 2;
+    Currency currency = 3;
+}
+
+enum Currency {
+    EUR = 0;
+    USD = 1;
+    GBP = 2;
+}
+
+message Response {
+
 }

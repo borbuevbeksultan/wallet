@@ -2,26 +2,26 @@ package kg.apps;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
 
-import static kg.apps.MyServiceGrpc.newBlockingStub;
+import java.util.Random;
 
 public class App {
     public static void main(String[] args) {
-
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8888)
                 .usePlaintext().build();
 
-        MyServiceGrpc.MyServiceBlockingStub myServiceBlockingStub = newBlockingStub(channel);
+        WalletServiceGrpc.WalletServiceBlockingStub blockingStub = WalletServiceGrpc.newBlockingStub(channel);
 
-        Wallet.MyMessage myMessage = Wallet.MyMessage.newBuilder().setBody("body").build();
+        Wallet.Deposit deposit;
+        Random random = new Random();
 
-        try {
-            Wallet.MyMessage myMessage1 = myServiceBlockingStub.myMethod(myMessage);
-            System.out.println(myMessage1.getBody());
-        } catch (StatusRuntimeException e) {
-            System.out.println("RPC failed: " + e.getStatus());
+        for (int i = 0; i < 1000; i++) {
+            deposit = Wallet.Deposit.newBuilder()
+                    .setUserId(random.nextInt())
+                    .setAmount(random.nextDouble())
+                    .setCurrency(Wallet.Currency.GBP)
+                    .build();
+            blockingStub.deposit(deposit);
         }
-
     }
 }

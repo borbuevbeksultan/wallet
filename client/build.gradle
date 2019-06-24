@@ -11,6 +11,8 @@ repositories {
     mavenCentral()
 }
 
+evaluationDependsOn(':exchange')
+
 dependencies {
     compile project(':exchange')
     implementation "io.grpc:grpc-protobuf:1.21.0"
