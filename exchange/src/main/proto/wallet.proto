@@ -5,6 +5,7 @@ option java_package = 'kg.apps';
 service WalletService {
     rpc deposit (Deposit) returns (Response) {}
     rpc withdraw (Withdraw) returns (Response) {}
+    rpc balance (User) returns (Balances) {}
 }
 
 message Deposit {
@@ -17,6 +18,19 @@ message Withdraw {
     uint32 user_id = 1;
     double amount = 2;
     Currency currency = 3;
+}
+
+message Balances {
+    repeated Balance balance = 1;
+}
+
+message Balance {
+    double amount = 1;
+    Currency currency = 2;
+}
+
+message User {
+    uint32 user_id = 1;
 }
 
 enum Currency {

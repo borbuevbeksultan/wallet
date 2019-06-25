@@ -1,5 +1,6 @@
 package kg.apps.service.impl;
 
+import kg.apps.dto.BalanceDto;
 import kg.apps.model.Balance;
 import kg.apps.model.Currency;
 import kg.apps.model.User;
@@ -29,6 +30,7 @@ public class DefaultWalletService implements WalletService {
         Wallet wallet = user.getWallet();
         List<Balance> balances = wallet.getBalances();
 
+        //TODO: change to optimal request
         Optional<Balance> optionalBalance = balances
                 .stream()
                 .filter(balance -> currency.name().equalsIgnoreCase(balance.getCurrency().name()))
@@ -46,6 +48,7 @@ public class DefaultWalletService implements WalletService {
         Wallet wallet = user.getWallet();
         List<Balance> balances = wallet.getBalances();
 
+        //TODO: change to optimal request
         Optional<Balance> optionalBalance = balances
                 .stream()
                 .filter(balance -> currency.name().equalsIgnoreCase(balance.getCurrency().name()))
@@ -55,6 +58,28 @@ public class DefaultWalletService implements WalletService {
             balance.setAmount(balance.getAmount().subtract(amount));
             balanceRepository.save(balance);
         });
+    }
+
+    @Override
+    public BalanceDto balance(Long userId) {
+        BalanceDto result = new BalanceDto();
+        User user = userService.get(userId);
+        for (var currency : Currency.values()) {
+
+            Optional<Balance> optionalBalance = user.getWallet().getBalances()
+                    .stream()
+                    .filter(balance -> currency.name().equalsIgnoreCase(balance.getCurrency().name()))
+                    .findAny();
+
+            result.getAmountPerCurrency().put(
+                    currency,
+                    optionalBalance.isPresent()
+                            ? optionalBalance.get().getAmount()
+                            : BigDecimal.ZERO
+            );
+        }
+
+        return result;
     }
 
 }

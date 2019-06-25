@@ -39,4 +39,9 @@ public class DefaultWalletEndpoint implements WalletEndpoint {
         );
     }
 
+    @Override
+    public void balance(Wallet.User request) {
+        int userId = request.getUserId();
+    }
+
 }

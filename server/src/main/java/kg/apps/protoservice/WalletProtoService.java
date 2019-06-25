@@ -29,4 +29,10 @@ public class WalletProtoService extends WalletServiceGrpc.WalletServiceImplBase 
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void balance(Wallet.User request, StreamObserver<Wallet.Balances> responseObserver) {
+        walletEndpoint.balance(request);
+        super.balance(request, responseObserver);
+    }
+
 }
