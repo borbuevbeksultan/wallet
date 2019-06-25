@@ -3,9 +3,7 @@ package kg.apps.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -16,8 +14,18 @@ import java.math.BigDecimal;
 public class Balance {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "wallet")
     private Wallet wallet;
+
+    @Column(name = "amount")
     private BigDecimal amount;
+
+    @Column(name = "currency")
+    @Enumerated(value = EnumType.STRING)
     private Currency currency;
+
 }

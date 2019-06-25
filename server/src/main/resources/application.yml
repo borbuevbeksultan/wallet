@@ -7,3 +7,8 @@ spring:
     username: sa
     password: passwordr
     driver-class-name: org.h2.Driver
+    data: classpath:init.sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop

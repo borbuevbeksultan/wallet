@@ -17,7 +17,7 @@ public class App {
 
         for (int i = 0; i < 1000; i++) {
             deposit = Wallet.Deposit.newBuilder()
-                    .setUserId(random.nextInt())
+                    .setUserId(1)
                     .setAmount(random.nextDouble())
                     .setCurrency(Wallet.Currency.GBP)
                     .build();
