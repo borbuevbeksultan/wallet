@@ -17,15 +17,15 @@ public class WalletProtoService extends WalletServiceGrpc.WalletServiceImplBase 
 
     @Override
     public void deposit(Wallet.Deposit request, StreamObserver<Wallet.Response> responseObserver) {
-        walletEndpoint.deposit(request);
-        responseObserver.onNext(Wallet.Response.newBuilder().build());
+        Wallet.Response depositResponse = walletEndpoint.deposit(request);
+        responseObserver.onNext(depositResponse);
         responseObserver.onCompleted();
     }
 
     @Override
     public void withdraw(Wallet.Withdraw request, StreamObserver<Wallet.Response> responseObserver) {
-        walletEndpoint.withdraw(request);
-        responseObserver.onNext(Wallet.Response.newBuilder().build());
+        Wallet.Response withdrawResponse = walletEndpoint.withdraw(request);
+        responseObserver.onNext(withdrawResponse);
         responseObserver.onCompleted();
     }
 

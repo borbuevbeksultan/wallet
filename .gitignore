@@ -54,3 +54,4 @@ server/build/tmp/compileJava/
 /server/build/
 /exchange/build/
 /client/build/
+/gradle/
