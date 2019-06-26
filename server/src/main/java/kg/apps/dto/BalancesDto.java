@@ -6,13 +6,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 public class BalancesDto {
 
-    List<BalanceDto> balanceDtos;
+    List<BalanceDto> balanceDtos = new ArrayList<>();
 
     @Getter
     @AllArgsConstructor

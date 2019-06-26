@@ -4,16 +4,17 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import kg.apps.WalletServiceGrpc;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 
 @Component
-@Configuration
+@Profile("!test")
 @RequiredArgsConstructor
-public class GrpcServer {
+public class GrpcServerRunner implements ApplicationRunner {
 
     private final WalletServiceGrpc.WalletServiceImplBase walletServiceImplBase;
 
@@ -27,7 +28,8 @@ public class GrpcServer {
                 .build();
     }
 
-    public void start() throws IOException, InterruptedException {
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
         grpcServer.start();
         grpcServer.awaitTermination();
     }

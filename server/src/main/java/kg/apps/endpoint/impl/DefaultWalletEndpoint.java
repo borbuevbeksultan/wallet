@@ -35,7 +35,7 @@ public class DefaultWalletEndpoint implements WalletEndpoint {
                 BigDecimal.valueOf(request.getAmount()),
                 currency);
 
-        return Wallet.Response.newBuilder().setMessage("Success").build();
+        return Wallet.Response.newBuilder().setMessage("Ok").build();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DefaultWalletEndpoint implements WalletEndpoint {
         }
 
 
-        return Wallet.Response.newBuilder().setMessage("Success").build();
+        return Wallet.Response.newBuilder().setMessage("Ok").build();
     }
 
     @Override
