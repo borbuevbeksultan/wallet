@@ -31,8 +31,9 @@ public class WalletProtoService extends WalletServiceGrpc.WalletServiceImplBase 
 
     @Override
     public void balance(Wallet.User request, StreamObserver<Wallet.Balances> responseObserver) {
-        walletEndpoint.balance(request);
-        super.balance(request, responseObserver);
+        Wallet.Balances balances = walletEndpoint.balance(request);
+        responseObserver.onNext(balances);
+        responseObserver.onCompleted();
     }
 
 }

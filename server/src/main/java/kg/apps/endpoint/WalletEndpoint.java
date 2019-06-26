@@ -3,7 +3,7 @@ package kg.apps.endpoint;
 import kg.apps.Wallet;
 
 public interface WalletEndpoint {
-    void deposit(Wallet.Deposit request);
-    void withdraw(Wallet.Withdraw request);
-    void balance(Wallet.User request);
+    Wallet.Response deposit(Wallet.Deposit request);
+    Wallet.Response withdraw(Wallet.Withdraw request);
+    Wallet.Balances balance(Wallet.User request);
 }

@@ -33,12 +33,12 @@ message User {
     uint32 user_id = 1;
 }
 
+message Response {
+    string message = 1;
+}
+
 enum Currency {
     EUR = 0;
     USD = 1;
     GBP = 2;
-}
-
-message Response {
-
 }
