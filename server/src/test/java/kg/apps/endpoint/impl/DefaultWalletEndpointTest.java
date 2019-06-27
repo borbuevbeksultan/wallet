@@ -22,42 +22,39 @@ class DefaultWalletEndpointTest {
 
     @Test
     void checkWalletEndpoint_givenUserWithEmptyBalance_shouldResponseForAllAsserts() {
-        Wallet.Response response = withdrawalWith200Usd();//1
+        Wallet.Response response = withdrawalWith200Usd();
         assertThat(response.getMessage()).isEqualTo("Insufficient funds");
 
-        List<Wallet.Balance> balances = depositWith100Usd();//2
+        List<Wallet.Balance> balancesAfterFirstDeposit = depositWith100UsdAndReturnBalance();
+        assertUsdBalanceForUserOne(balancesAfterFirstDeposit, 100);
 
-        assertUsdBalanceForUser(balances, 100);//3
-
-        Wallet.Response responseAfterSecondWithdraw = withdrawalWith200Usd();//4
+        Wallet.Response responseAfterSecondWithdraw = withdrawalWith200Usd();
         assertThat(responseAfterSecondWithdraw.getMessage()).isEqualTo("Insufficient funds");
 
-        List<Wallet.Balance> balanceAfterSecondDeposit = depositWith100Usd();//5
+        List<Wallet.Balance> balanceAfterSecondDeposit = depositWith100UsdAndReturnBalance();
+        assertUsdBalanceForUserOne(balanceAfterSecondDeposit, 200);
 
-        assertUsdBalanceForUser(balanceAfterSecondDeposit, 200);//6
-
-        Wallet.Response responseAfterThirdWithdrawal = withdrawalWith200Usd();//7
+        Wallet.Response responseAfterThirdWithdrawal = withdrawalWith200Usd();
         assertThat(responseAfterThirdWithdrawal.getMessage()).isEqualTo("Insufficient funds");
 
-        List<Wallet.Balance> responseAfterThirdDeposit = depositWith100Usd();//8
+        List<Wallet.Balance> responseAfterThirdDeposit = depositWith100UsdAndReturnBalance();
+        assertUsdBalanceForUserOne(responseAfterThirdDeposit, 300);
 
-        assertUsdBalanceForUser(responseAfterThirdDeposit, 300);//9
-
-        Wallet.Response responseAfterFourthWithdrawal = withdrawalWith200Usd();//10
+        Wallet.Response responseAfterFourthWithdrawal = withdrawalWith200Usd();
         assertThat(responseAfterFourthWithdrawal.getMessage()).isEqualTo("Ok");
 
         List<Wallet.Balance> balanceAfterFourthWithdrawal = balanceForUserOne();
-        assertUsdBalanceForUser(balanceAfterFourthWithdrawal, 100);//11
+        assertUsdBalanceForUserOne(balanceAfterFourthWithdrawal, 100);
 
-        Wallet.Response responseAfterFifthWithdrawal = withdrawalWith200Usd();//12
+        Wallet.Response responseAfterFifthWithdrawal = withdrawalWith200Usd();
         assertThat(responseAfterFifthWithdrawal.getMessage()).isEqualTo("Insufficient funds");
     }
 
-    private List<Wallet.Balance> depositWith100Usd() {
+    private List<Wallet.Balance> depositWith100UsdAndReturnBalance() {
         //arrange
         Wallet.Deposit deposit = Wallet.Deposit.newBuilder()
                 .setUserId(1)
-                .setAmount((double) 100)
+                .setAmount(100)
                 .setCurrency(Wallet.Currency.USD)
                 .build();
         //act
@@ -73,7 +70,7 @@ class DefaultWalletEndpointTest {
         //arrange
         Wallet.Withdraw withdraw = Wallet.Withdraw.newBuilder()
                 .setUserId(1)
-                .setAmount((double) 200)
+                .setAmount(200)
                 .setCurrency(Wallet.Currency.USD)
                 .build();
 
@@ -87,7 +84,7 @@ class DefaultWalletEndpointTest {
                 .build()).getBalanceList();
     }
 
-    private void assertUsdBalanceForUser(List<Wallet.Balance> balances, double expectedAmount) {
+    private void assertUsdBalanceForUserOne(List<Wallet.Balance> balances, double expectedAmount) {
         Optional<Wallet.Balance> usdBalance = balances.stream()
                 .filter(balance -> balance.getCurrency().equals(Wallet.Currency.USD))
                 .findFirst();

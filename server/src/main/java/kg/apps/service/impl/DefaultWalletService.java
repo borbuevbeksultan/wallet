@@ -56,7 +56,7 @@ public class DefaultWalletService implements WalletService {
                 .findAny();
 
         optionalBalance.ifPresent(balance -> {
-            if (balance.getAmount().subtract(amount).compareTo(BigDecimal.ONE) < 0) {
+            if (balance.getAmount().subtract(amount).compareTo(BigDecimal.ZERO) <= 0) {
                 throw new IllegalStateException();
             }
             balance.setAmount(balance.getAmount().subtract(amount));
