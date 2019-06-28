@@ -24,7 +24,7 @@ For Linux
 ```
 ./gradlew :client:run --args='<users> <threads_per_user> <rounds_per_thread>'
 ```
-For Windowscollaborator
+For Windows
 ```
 gradlew :client:run --args='<users> <threads_per_user> <rounds_per_thread>'
 ```
