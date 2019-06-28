@@ -1,4 +1,4 @@
-# wallet
+# Wallet
 Client-server wallet implementation
 
 ## How to run
