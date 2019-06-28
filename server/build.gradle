@@ -26,6 +26,8 @@ dependencies {
     compile 'com.h2database:h2:1.4.199'
     compile 'org.springframework.boot:spring-boot-starter-validation'
     compile 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+    compile 'org.flywaydb:flyway-core:5.2.4'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.6'
 

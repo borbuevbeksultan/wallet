@@ -1,13 +1,24 @@
+
 spring:
-  h2:
-    console:
-      enabled: true
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: passwordr
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/wallet
+    username: root
+    password: iceknight
+    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  application:
+    flyway:
+      baseline-on-migrate: true
+      enabled: true
+      out-of-order: true
+      placeholder-prefix: '#['
+      placeholder-replacement: true
+      placeholder-suffix: ']'
+      placeholders:
+        username: ${spring.datasource.username}
