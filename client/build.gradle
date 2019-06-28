@@ -1,11 +1,11 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
+apply plugin: 'application'
 group 'kg.apps'
 version '1.0'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -19,3 +19,14 @@ dependencies {
     implementation "io.grpc:grpc-stub:1.21.0"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'kg.apps.WalletClient'
+        )
+    }
+}
+
+mainClassName = 'kg.apps.WalletClient'
