@@ -7,10 +7,12 @@ public class ClientEmulator implements Runnable {
 
     private int threads;
     private int rounds;
+    private int userId;
 
-    public ClientEmulator(int threads, int rounds) {
+    public ClientEmulator(int userId, int threads, int rounds) {
         this.threads = threads;
         this.rounds = rounds;
+        this.userId = userId;
     }
 
     @Override
@@ -18,7 +20,7 @@ public class ClientEmulator implements Runnable {
         ExecutorService executorService = Executors.newFixedThreadPool(threads);
 
         for (int i = 0; i < threads; i++) {
-            executorService.submit(new RequestEmulator(rounds));
+            executorService.submit(new RequestEmulator(userId, rounds));
         }
 
         executorService.shutdown();

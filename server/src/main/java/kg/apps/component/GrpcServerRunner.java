@@ -2,6 +2,7 @@ package kg.apps.component;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import kg.apps.UserServiceGrpc;
 import kg.apps.WalletServiceGrpc;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
@@ -17,6 +18,7 @@ import javax.annotation.PostConstruct;
 public class GrpcServerRunner implements ApplicationRunner {
 
     private final WalletServiceGrpc.WalletServiceImplBase walletServiceImplBase;
+    private final UserServiceGrpc.UserServiceImplBase userServiceImplBase;
 
     private Server grpcServer;
 
@@ -25,6 +27,7 @@ public class GrpcServerRunner implements ApplicationRunner {
         grpcServer = ServerBuilder
                 .forPort(8888)
                 .addService(walletServiceImplBase)
+                .addService(userServiceImplBase)
                 .build();
     }
 

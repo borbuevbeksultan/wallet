@@ -8,6 +8,10 @@ service WalletService {
     rpc balance (User) returns (Balances) {}
 }
 
+service UserService {
+    rpc create (UserCreationRequest) returns (UserCreationResponse) {}
+}
+
 message Deposit {
     uint32 user_id = 1;
     double amount = 2;
@@ -31,6 +35,15 @@ message Balance {
 
 message User {
     uint32 user_id = 1;
+}
+
+message UserCreationRequest {
+    string email = 1;
+}
+
+message UserCreationResponse {
+    uint32 user_id = 1;
+    string email = 2;
 }
 
 message Response {

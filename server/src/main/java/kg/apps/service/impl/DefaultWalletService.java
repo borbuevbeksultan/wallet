@@ -26,7 +26,7 @@ public class DefaultWalletService implements WalletService {
     private final BalanceRepository balanceRepository;
 
     @Override
-    public void deposit(Long userId, BigDecimal amount, Currency currency) {
+    public void deposit(Integer userId, BigDecimal amount, Currency currency) {
         User user = userService.get(userId);
         Wallet wallet = user.getWallet();
         List<Balance> balances = wallet.getBalances();
@@ -44,7 +44,7 @@ public class DefaultWalletService implements WalletService {
     }
 
     @Override
-    public void withdraw(Long userId, BigDecimal amount, Currency currency) throws IllegalStateException {
+    public void withdraw(Integer userId, BigDecimal amount, Currency currency) throws IllegalStateException {
         User user = userService.get(userId);
         Wallet wallet = user.getWallet();
         List<Balance> balances = wallet.getBalances();
@@ -65,7 +65,7 @@ public class DefaultWalletService implements WalletService {
     }
 
     @Override
-    public BalancesDto balance(Long userId) throws EntityNotFoundException {
+    public BalancesDto balance(Integer userId) throws EntityNotFoundException {
         BalancesDto result = new BalancesDto();
         User user = userService.get(userId);
 

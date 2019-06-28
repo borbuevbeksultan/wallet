@@ -11,15 +11,14 @@ public class RoundA implements Round {
         this.walletClient = walletClient;
     }
 
-    public void execute() {
-        System.out.println("Thread: " + Thread.currentThread().getId());
-        walletClient.deposit(100., Wallet.Currency.USD);
-        walletClient.withdraw(200., Wallet.Currency.USD);
-        walletClient.deposit(100., Wallet.Currency.EUR);
-        walletClient.balance(1);
-        walletClient.withdraw(100., Wallet.Currency.USD);
-        walletClient.balance(1);
-        walletClient.withdraw(100., Wallet.Currency.USD);
+    @Override
+    public void execute(int userId) {
+        walletClient.deposit(userId,100., Wallet.Currency.USD);
+        walletClient.withdraw(userId,200., Wallet.Currency.USD);
+        walletClient.deposit(userId,100., Wallet.Currency.EUR);
+        walletClient.balance(userId);
+        walletClient.withdraw(userId,100., Wallet.Currency.USD);
+        walletClient.balance(userId);
+        walletClient.withdraw(userId,100., Wallet.Currency.USD);
     }
-
 }

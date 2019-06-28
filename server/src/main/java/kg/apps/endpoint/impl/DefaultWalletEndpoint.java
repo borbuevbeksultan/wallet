@@ -31,7 +31,7 @@ public class DefaultWalletEndpoint implements WalletEndpoint {
         }
 
         walletService.deposit(
-                (long) request.getUserId(),
+                request.getUserId(),
                 BigDecimal.valueOf(request.getAmount()),
                 currency);
 
@@ -44,7 +44,7 @@ public class DefaultWalletEndpoint implements WalletEndpoint {
         try {
             currency = currencyMapper.convertFromProtoMessage(request.getCurrency());
             walletService.withdraw(
-                    (long) request.getUserId(),
+                    request.getUserId(),
                     BigDecimal.valueOf(request.getAmount()),
                     currency);
         } catch (IllegalArgumentException e) {
@@ -59,7 +59,7 @@ public class DefaultWalletEndpoint implements WalletEndpoint {
 
     @Override
     public Wallet.Balances balance(Wallet.User request) {
-        long userId = (long) request.getUserId();
+        int userId = request.getUserId();
         BalancesDto balancesDto;
         try {
             balancesDto = walletService.balance(userId);

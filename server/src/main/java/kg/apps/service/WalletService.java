@@ -6,9 +6,9 @@ import kg.apps.model.Currency;
 import java.math.BigDecimal;
 
 public interface WalletService {
-    void deposit(Long userId, BigDecimal amount, Currency currency);
+    void deposit(Integer userId, BigDecimal amount, Currency currency);
 
-    void withdraw(Long userId, BigDecimal amount, Currency currency) throws IllegalStateException;
+    void withdraw(Integer userId, BigDecimal amount, Currency currency) throws IllegalStateException;
 
-    BalancesDto balance(Long userId);
+    BalancesDto balance(Integer userId);
 }

@@ -16,9 +16,9 @@ public class WalletClient {
         blockingStub = WalletServiceGrpc.newBlockingStub(channel);
     }
 
-    public Wallet.Response deposit(Double amount, Wallet.Currency currency) {
+    public Wallet.Response deposit(Integer userId, Double amount, Wallet.Currency currency) {
         Wallet.Deposit deposit = Wallet.Deposit.newBuilder()
-                .setUserId(1)
+                .setUserId(userId)
                 .setAmount(amount)
                 .setCurrency(currency)
                 .build();
@@ -26,9 +26,9 @@ public class WalletClient {
         return blockingStub.deposit(deposit);
     }
 
-    public Wallet.Response withdraw(Double amount, Wallet.Currency currency) {
+    public Wallet.Response withdraw(Integer userId, Double amount, Wallet.Currency currency) {
         Wallet.Withdraw withdraw = Wallet.Withdraw.newBuilder()
-                .setUserId(1)
+                .setUserId(userId)
                 .setAmount(amount)
                 .setCurrency(currency)
                 .build();
