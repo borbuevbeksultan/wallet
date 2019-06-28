@@ -4,7 +4,7 @@ Client-server wallet implementation
 ### How to run
 Copy repository into your local machine.
 
-####Server
+#### Server
 Execute in root
 For linux 
 ```
@@ -16,7 +16,7 @@ For windows
 gradlew :server:bootRun
 ```
 
-####Client
+#### Client
 The wallet client emulates a number of users concurrently using the wallet. 
 To run client with certain parameters it need to execute
 
