@@ -56,30 +56,26 @@ class DefaultWalletEndpointTest {
     }
 
     private List<Wallet.Balance> depositWith100UsdAndReturnBalance() {
-        //arrange
         Wallet.Deposit deposit = Wallet.Deposit.newBuilder()
                 .setUserId(1)
                 .setAmount(100)
                 .setCurrency(Wallet.Currency.USD)
                 .build();
-        //act
+
         walletEndpoint.deposit(deposit);
 
-        //assert
         return walletEndpoint.balance(Wallet.User.newBuilder()
                 .setUserId(1)
                 .build()).getBalanceList();
     }
 
     private Wallet.Response withdrawalWith200Usd() {
-        //arrange
         Wallet.Withdraw withdraw = Wallet.Withdraw.newBuilder()
                 .setUserId(1)
                 .setAmount(200)
                 .setCurrency(Wallet.Currency.USD)
                 .build();
 
-        //act
         return walletEndpoint.withdraw(withdraw);
     }
 
